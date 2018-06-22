@@ -1,0 +1,20 @@
+setwd("C:\\Users\\Yao\\Desktop\\EV1 - UNIQUE")  
+filenames3 <- list.files(path = "C:\\Users\\Yao\\Desktop\\EV1 - UNIQUE")
+DemoAndOpticks<-do.call("cbind", lapply(filenames3, read.csv, header = TRUE))
+DemoAndOpticksFsaldu<-subset(DemoAndOpticks, GEO=="FSALDU")
+
+setwd("C:\\Users\\Yao\\Desktop\\combined")  
+PRIZEUNIQUE<-read.csv(file = "PRIZM5_Unique_License_201608.csv")
+PRIZEENHANCED<-read.csv(file = "PRIZM5_RuralEnhanced_License_201608.csv")
+DemoAndOpticksFsaldu<-read.csv(file = "DemoAndOpticksFsaldu.csv")
+
+PrizmUniqueAppen<-merge(x = PRIZEUNIQUE, y = DemoAndOpticksFsaldu, by.x = "FSALDU", by.y = "CODE", all.x = TRUE)
+PrizmEnhancedAppen<-merge(x = PRIZEENHANCED, y = DemoAndOpticksFsaldu, by.x = "FSALDU", by.y = "CODE", all.x =  TRUE)
+PrizmEnhancedAppen2<-merge(x = PRIZEENHANCED, y = DemoAndOpticksFsaldu, by.x = "FSALDU", by.y = "CODE")
+
+
+write.table(DemoAndOpsticks, "C:\\Users\\yao\\Desktop\\combined\\DemoAndOpticks.csv", sep = ",", row.names=FALSE)
+write.table(DemoAndOpticksFsaldu, "C:\\Users\\yao\\Desktop\\combined\\DemoAndOpticksFsaldu.csv", sep = ",",row.names=FALSE)
+write.table(PrizmUniqueAppen, "C:\\Users\\yao\\Desktop\\combined\\PrizmUniqueAppen.csv", sep = ",", row.names=FALSE)
+write.table(PrizmEnhancedAppen, "C:\\Users\\yao\\Desktop\\combined\\PrizmEnhancedAppen.csv", sep = ",", row.names=FALSE)
+write.table(PrizmEnhancedAppen2, "C:\\Users\\yao\\Desktop\\combined\\PrizmEnhancedAppen2.csv", sep = ",")
